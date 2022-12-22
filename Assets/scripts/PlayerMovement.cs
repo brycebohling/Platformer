@@ -41,13 +41,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (isDashing)
-        {
-            return;
-        }
-
-        movementX = Input.GetAxisRaw("Horizontal");
-
         Flip();
 
         //if (isGrounded())
@@ -59,10 +52,15 @@ public class PlayerMovement : MonoBehaviour
         //    hangCounter -= Time.deltaTime;
         //}
 
-        if (isGrounded())
+        if (isGrounded()) 
         {
             jumpCount = jumpNumber - 1;
+            movementX = 0f;
+        } else 
+        {
+            movementX = Input.GetAxisRaw("Horizontal");
         }
+
 
         if (Input.GetButtonDown("Jump") && isGrounded() || Input.GetButtonDown("Jump") && jumpCount > 0)
         {
