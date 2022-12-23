@@ -23,9 +23,14 @@ public class PlayerMovement : MonoBehaviour
 
     //Jumping
     [SerializeField] private float jumpForce;
-    // [SerializeField] private int jumpNumber;
-    // private int jumpCount;
     private bool doubleJump;
+
+    //Wall jumping
+    [SerializeField] private Transform wallCheck;
+    private bool isWallTouch;
+    private bool isSlideing;
+    [SerializeField] float wallSlidingSpeed;
+    [SerializeField] private LayerMask wallLayer;
 
     //Dashing
     private bool canDash = true;
@@ -35,15 +40,13 @@ public class PlayerMovement : MonoBehaviour
     private float dashingCooldown = 1f;
     [SerializeField] TrailRenderer tr;
 
-    private void Start()
-    {
-        
-    }
 
-    void Update()
+    private void Update()
     {
         Flip();
 
+        
+        isWallTouch = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.2f, 1f), 0, wallLayer);
         //if (isGrounded())
         //{
         //    hangCounter = hangTime;
@@ -52,10 +55,9 @@ public class PlayerMovement : MonoBehaviour
         //{
         //    hangCounter -= Time.deltaTime;
         //}
-
+        
         if (isGrounded()) 
         {
-            // jumpCount = jumpNumber - 1;
             movementX = 0f;
             if (!Input.GetButton("Jump"))
             {
@@ -65,8 +67,15 @@ public class PlayerMovement : MonoBehaviour
         {
             movementX = Input.GetAxisRaw("Horizontal");
         }
+        
+        if (isWallTouch && !isGrounded() && movementX != 0)
+        {
+            isSlideing = true;
+        } else
+        {
+            isSlideing = false;
+        }
 
-        //  && isGrounded() || Input.GetButtonDown("Jump") && jumpCount > 0)
         if (Input.GetButtonDown("Jump"))
         {
             if (isGrounded() || doubleJump)
@@ -74,8 +83,6 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 doubleJump = !doubleJump;
             }
-            
-            // jumpCount -= 1;
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
@@ -97,11 +104,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.velocity = new Vector2(movementX * speed, rb.velocity.y);
+
+        if (isSlideing)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
     }
 
     private bool isGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        // return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        return Physics2D.OverlapBox(groundCheck.position, new Vector2(1.7f, 0.24f), 0, groundLayer);
     }
 
     private void Flip()
@@ -131,3 +144,4 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 }
+
