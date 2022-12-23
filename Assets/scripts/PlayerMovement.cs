@@ -31,6 +31,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isSlideing;
     [SerializeField] float wallSlidingSpeed;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private wallJumpDuration;
+    [SerializeField] Vector2 wallJumpForce;
+    private bool wallJumping;
 
     //Dashing
     private bool canDash = true;
@@ -82,6 +85,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 doubleJump = !doubleJump;
+            } else if (isSlideing)
+            {
+                wallJumping = true;
+                Invoke("stopWallJump", wallJumpDuration);
             }
         }
 
@@ -108,6 +115,14 @@ public class PlayerMovement : MonoBehaviour
         if (isSlideing)
         {
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+
+        if (wallJumping)
+        {
+            rb.velocity = new Vector2(-movementX * wallJumpForce.x, wallJumpForce.y);
+        } else 
+        {
+            rb.velocity = new Vector2(movementX * speed, rb.velocity.y);
         }
     }
 
@@ -142,6 +157,10 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+    private void stopWallJump()
+    {
+        wallJumping = false;
     }
 }
 
