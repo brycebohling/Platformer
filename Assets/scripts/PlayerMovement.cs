@@ -45,7 +45,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Flip();
 
-        
+        movementX = 0;
+
         isWallTouch = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.2f, 1f), 0, wallLayer);
         //if (isGrounded())
         //{
@@ -113,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded()
     {
         // return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-        return Physics2D.OverlapBox(groundCheck.position, new Vector2(1.7f, 0.24f), 0, groundLayer);
+        return Physics2D.OverlapBox(groundCheck.position, new Vector2(0.4f, .2f), 0, groundLayer);
     }
 
     private void Flip()
