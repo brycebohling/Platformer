@@ -19,6 +19,5 @@ public class Spike : MonoBehaviour
             PLS.respawn();
         }
     }
-
 }
         
