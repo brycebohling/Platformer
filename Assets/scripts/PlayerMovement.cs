@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //physics
+    [SerializeField] float gravity;
+
     //Horizontal movement
     private float movementX;
     [SerializeField] private float speed;
-
     private bool isFacingRight = true;
 
     //Physics
@@ -16,10 +18,6 @@ public class PlayerMovement : MonoBehaviour
     //Isgrounded
     [SerializeField] Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-
-    //Jumping over ledge
-    //[SerializeField] private float hangTime = 0.2f;
-    //private float hangCounter;
 
     //Jumping
     [SerializeField] private float jumpForce;
@@ -31,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isSliding;
     [SerializeField] float wallSlidingSpeed;
     [SerializeField] private LayerMask wallLayer;
+    private bool wallJump;
 
     //Dashing
     private bool canDash = true;
@@ -49,20 +48,12 @@ public class PlayerMovement : MonoBehaviour
 
         isWallTouch = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.2f, 1f), 0, wallLayer);
         
-        //if (isGrounded())
-        //{
-        //    hangCounter = hangTime;
-        //}
-        //else
-        //{
-        //    hangCounter -= Time.deltaTime;
-        //}
-        
         if (isGrounded()) 
         {
             if (!Input.GetButton("Jump"))
             {
                 doubleJump = false;
+                wallJump = false;
             }
         } else 
         {
@@ -77,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         } else
         {
             isSliding = false;
-            rb.gravityScale = 10;
+            rb.gravityScale = gravity;
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -87,11 +78,10 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 doubleJump = !doubleJump;
             } 
-            // else if (isSliding)
-            // {
-            //     wallJumping = true;
-            //     Invoke("stopWallJump", wallJumpDuration);
-            // }
+            else if (isSliding)
+            {
+                wallJump = true;
+            }
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
