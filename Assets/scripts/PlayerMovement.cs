@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     //Isgrounded
     [SerializeField] Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    private bool isGrounded;
 
     //Jumping
     [SerializeField] private float jumpForce;
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Wall jumping
     [SerializeField] private Transform wallCheck;
-    private bool isWallTouch;
+    private bool isTouchingWall;
     private bool isSliding;
     [SerializeField] float wallSlidingSpeed;
     [SerializeField] private LayerMask wallLayer;
@@ -46,26 +47,30 @@ public class PlayerMovement : MonoBehaviour
 
         movementX = 0;
 
-        isWallTouch = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.2f, 1f), 0, wallLayer);
+        isTouchingWall = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.1f, 0.3f), 0, wallLayer);
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, new Vector2(0.4f, .2f), 0, groundLayer);
         
-        if (isGrounded()) 
+        if (isGrounded) 
         {
+            wallJump = false;
             if (!Input.GetButton("Jump"))
             {
                 doubleJump = false;
-                wallJump = false;
             }
         } else 
         {
             movementX = Input.GetAxisRaw("Horizontal");
         }
         
-        if (isWallTouch && !isGrounded())
+        if (isTouchingWall && !isGrounded)
         {
+            doubleJump = false;
             isSliding = true;
+            wallJump = true;
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.gravityScale = 0;
-        } else
+        } 
+        else
         {
             isSliding = false;
             rb.gravityScale = gravity;
@@ -73,15 +78,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (isGrounded() || doubleJump)
+            if (isGrounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 doubleJump = !doubleJump;
-            } 
-            else if (isSliding)
+            } else if (wallJump)
             {
-                wallJump = true;
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                wallJump = !wallJump;
+                doubleJump = !doubleJump;
+            } else if (doubleJump)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                doubleJump = !doubleJump;
             }
+
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
@@ -104,10 +115,8 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(movementX * speed, rb.velocity.y);
     }
 
-    private bool isGrounded()
-    {
-        return Physics2D.OverlapBox(groundCheck.position, new Vector2(0.4f, .2f), 0, groundLayer);
-    }
+
+
 
     private void Flip()
     {
