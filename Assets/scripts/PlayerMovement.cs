@@ -58,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
         
         if (isGrounded()) 
         {
-            movementX = 0f;
             if (!Input.GetButton("Jump"))
             {
                 doubleJump = false;
