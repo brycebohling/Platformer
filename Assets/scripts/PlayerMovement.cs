@@ -23,8 +23,9 @@ public class PlayerMovement : MonoBehaviour
 
     //Jumping
     [SerializeField] private float jumpForce;
-    [SerializeField] private int jumpNumber;
-    private int jumpCount;
+    // [SerializeField] private int jumpNumber;
+    // private int jumpCount;
+    private bool doubleJump;
 
     //Dashing
     private bool canDash = true;
@@ -54,18 +55,27 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded()) 
         {
-            jumpCount = jumpNumber - 1;
+            // jumpCount = jumpNumber - 1;
             movementX = 0f;
+            if (!Input.GetButton("Jump"))
+            {
+                doubleJump = false;
+            }
         } else 
         {
             movementX = Input.GetAxisRaw("Horizontal");
         }
 
-
-        if (Input.GetButtonDown("Jump") && isGrounded() || Input.GetButtonDown("Jump") && jumpCount > 0)
+        //  && isGrounded() || Input.GetButtonDown("Jump") && jumpCount > 0)
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            jumpCount -= 1;
+            if (isGrounded() || doubleJump)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                doubleJump = !doubleJump;
+            }
+            
+            // jumpCount -= 1;
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
