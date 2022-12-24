@@ -8,7 +8,6 @@ public class CheckpointScript : MonoBehaviour
 
     private bool cantRun = false;
     private Animator anim;
-
      
     private void Start()
     {
@@ -18,14 +17,11 @@ public class CheckpointScript : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (cantRun == false)
+        if (!cantRun && collision.gameObject.CompareTag("Player"))
         {
-            if (collision.gameObject.CompareTag("Player"))
-            {
                 PLS.whichCP++;
                 cantRun = true;
                 anim.SetBool("collided", true);
-            }
         }
     }
 }

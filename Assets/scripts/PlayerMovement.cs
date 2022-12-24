@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         isTouchingWall = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.1f, 0.3f), 0, wallLayer);
         isGrounded = Physics2D.OverlapBox(groundCheck.position, new Vector2(0.4f, .2f), 0, groundLayer);
         
-        if (isGrounded) 
+        if (isGrounded)
         {
             wallJump = false;
             if (!Input.GetButton("Jump"))
