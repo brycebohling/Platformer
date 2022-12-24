@@ -27,8 +27,6 @@ public class PlayerMovement : MonoBehaviour
     //Wall jumping
     [SerializeField] private Transform wallCheck;
     private bool isTouchingWall;
-    private bool isSliding;
-    [SerializeField] float wallSlidingSpeed;
     [SerializeField] private LayerMask wallLayer;
     private bool wallJump;
 
@@ -43,6 +41,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
         Flip();
 
         movementX = 0;
@@ -65,14 +67,12 @@ public class PlayerMovement : MonoBehaviour
         if (isTouchingWall && !isGrounded)
         {
             doubleJump = false;
-            isSliding = true;
             wallJump = true;
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.gravityScale = 0;
         } 
         else
         {
-            isSliding = false;
             rb.gravityScale = gravity;
         }
 

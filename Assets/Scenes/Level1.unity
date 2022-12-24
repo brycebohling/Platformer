@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11752dd8f2d554b7b914321daa4a6517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 10
+  gravity: 8
   speed: 8
   rb: {fileID: 516966822}
   groundCheck: {fileID: 1719264083}
@@ -376,7 +376,6 @@ MonoBehaviour:
     m_Bits: 64
   jumpForce: 22
   wallCheck: {fileID: 2069724494}
-  wallSlidingSpeed: 0
   wallLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -422,7 +421,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 8
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
