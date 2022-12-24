@@ -38,6 +38,10 @@ public class PlayerMovement : MonoBehaviour
     private float dashingCooldown = 1f;
     [SerializeField] TrailRenderer tr;
 
+    //Partical Effects
+
+    [SerializeField] ParticleSystem jumpEffect;
+
 
     private void Update()
     {
@@ -90,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
             } else if (doubleJump)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                jumpParticles();
                 doubleJump = !doubleJump;
             }
 
@@ -143,6 +148,14 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+
+    private void jumpParticles()
+    {
+        jumpEffect.gameObject.SetActive(true);
+        jumpEffect.Stop();
+        jumpEffect.transform.position = new Vector2(transform.position.x, transform.position.y - 0.5f);
+        jumpEffect.Play();
     }
 }
 
