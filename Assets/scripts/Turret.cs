@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    public Transform firepoint;
-    public GameObject bullet;
+    [SerializeField] private Transform firepoint;
+    [SerializeField] private GameObject bullet;
     private float timebetween;
-    public float starttimebetween;
-
+    [SerializeField] private float starttimebetween;
 
     void Start()
     {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7626205856371747183}
   - component: {fileID: 8931483696957357068}
   - component: {fileID: 7097385685800546411}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CheckPoint
   m_TagString: checkPoint1
   m_Icon: {fileID: 0}
@@ -97,10 +97,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0030508041, y: 0.018160462}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -111,7 +111,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3117313, y: 1.2284172}
+  m_Size: {x: 2.3, y: 1.6}
   m_EdgeRadius: 0
 --- !u!114 &8931483696957357068
 MonoBehaviour:
@@ -125,10 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b53253af17541a991e5e0fb37d6542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  playerCheck: {fileID: 0}
 --- !u!95 &7097385685800546411
 Animator:
   serializedVersion: 5

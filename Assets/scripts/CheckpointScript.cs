@@ -15,9 +15,9 @@ public class CheckpointScript : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!cantRun && collision.gameObject.CompareTag("Player"))
+        if (!cantRun && collider.gameObject.CompareTag("Player"))
         {
                 PLS.whichCP++;
                 cantRun = true;
