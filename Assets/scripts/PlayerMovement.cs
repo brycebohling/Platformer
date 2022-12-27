@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     private bool isGrounded;
+    private bool wasGrounded;
 
     //Jumping
     [SerializeField] private float jumpForce;
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isTouchingWall;
     [SerializeField] private LayerMask wallLayer;
     private bool wallJump;
+    private bool wasTouchingWall;
 
     //Dashing
     private bool canDash = true;
