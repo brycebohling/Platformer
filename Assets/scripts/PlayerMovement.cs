@@ -33,12 +33,12 @@ public class PlayerMovement : MonoBehaviour
     private bool wasTouchingWall;
 
     //Dashing
-    private bool canDash = true;
-    private bool isDashing;
-    private float dashingPower = 24f;
-    private float dashingTime = 0.2f;
-    private float dashingCooldown = 1f;
-    [SerializeField] TrailRenderer tr;
+    // private bool canDash = true;
+    // private bool isDashing;
+    // private float dashingPower = 24f;
+    // private float dashingTime = 0.2f;
+    // private float dashingCooldown = 1f;
+    // [SerializeField] TrailRenderer tr;
 
     //Partical Effects
 
@@ -47,10 +47,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (isDashing)
-        {
-            return;
-        }
+        // if (isDashing)
+        // {
+        //     return;
+        // }
+
         Flip();
 
         movementX = 0;
@@ -88,11 +89,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 doubleJump = !doubleJump;
-            } else if (wallJump)
+            } else if (wallJump && !isTouchingWall)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 wallJump = !wallJump;
                 doubleJump = !doubleJump;
+                jumpParticles();
             } else if (doubleJump)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -107,18 +109,18 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-        {
-            StartCoroutine(Dash());
-        }
+        // if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        // {
+        //     StartCoroutine(Dash());
+        // }
     }
     
     private void FixedUpdate()
     {
-        if (isDashing)
-        {
-            return;
-        }
+        // if (isDashing)
+        // {
+        //     return;
+        // }
         rb.velocity = new Vector2(movementX * speed, rb.velocity.y);
     }
 
@@ -136,21 +138,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private IEnumerator Dash()
-    {
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        rb.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-    }
+    // private IEnumerator Dash()
+    // {
+    //     canDash = false;
+    //     isDashing = true;
+    //     float originalGravity = rb.gravityScale;
+    //     rb.gravityScale = 0f;
+    //     rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+    //     tr.emitting = true;
+    //     yield return new WaitForSeconds(dashingTime);
+    //     tr.emitting = false;
+    //     rb.gravityScale = originalGravity;
+    //     isDashing = false;
+    //     yield return new WaitForSeconds(dashingCooldown);
+    //     canDash = true;
+    // }
 
     private void jumpParticles()
     {
