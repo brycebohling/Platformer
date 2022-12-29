@@ -704,7 +704,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 1786837257}
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   laserSpeed: 1
 --- !u!1 &374891104
 GameObject:
