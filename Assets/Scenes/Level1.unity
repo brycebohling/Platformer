@@ -391,9 +391,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac81946f29f4483d934bc488babd232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 35
-  visionDistance: 10
-  lineOfSight: {fileID: 1786837257}
+  lineRenderer: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  laserSpeed: 0
 --- !u!1 &198633176
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,9 +701,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac81946f29f4483d934bc488babd232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 35
-  visionDistance: 10
-  lineOfSight: {fileID: 1786837257}
+  lineRenderer: {fileID: 1786837257}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  laserSpeed: 1
 --- !u!1 &374891104
 GameObject:
   m_ObjectHideFlags: 0
