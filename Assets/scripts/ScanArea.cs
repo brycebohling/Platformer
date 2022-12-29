@@ -4,71 +4,8 @@ using UnityEngine;
 
 public class ScanArea : MonoBehaviour
 {
-//     [SerializeField] private float rotationSpeed;
-//     [SerializeField] float visionDistance;
-//     [SerializeField] LineRenderer lineOfSight;
-//     private bool rayCastLeft;
-
-//     void Start ()
-//     {
-        
-//     }
-
-//     void Update()
-//     {
-//         lineOfSight.SetPosition(0, transform.position);
-
-//         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.right, visionDistance);
-
-
-//         if (transform.rotation.z > 0)
-//         {
-//             rayCastLeft = true;
-//         }
-//         else if (transform.rotation.z < -170)
-//         {
-//             rayCastLeft = false;
-//         }
-
-//         if (rayCastLeft)
-//         {
-//             transform.Rotate(Vector3.forward * -rotationSpeed * Time.deltaTime);
-//             Debug.Log("hello");
-//         } 
-//         else
-//         {
-//             Debug.Log("hi");
-//             transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
-//         }
-
-
-//         if (hitInfo.collider != null)
-//         {
-//             lineOfSight.SetPosition(1, hitInfo.point);
-//             lineOfSight.startColor = Color.green;
-//             lineOfSight.endColor = Color.green;
-//             if (hitInfo.collider.tag == "Player")
-//             {
-//                 lineOfSight.startColor = Color.red;
-//                 lineOfSight.endColor = Color.red;
-//                 lockedOnPlayer();
-//             }
-//         }
-//         else 
-//         {
-//             lineOfSight.SetPosition(1, transform.position + transform.right * visionDistance);
-//             lineOfSight.startColor = Color.green;
-//             lineOfSight.endColor = Color.green;
-//         }
-//     }
-//     private void lockedOnPlayer()
-//     {
-        
-//     }
-    public LineRenderer lineRenderer;
-    public LayerMask layerMask;
-    public float laserSpeed;
-
+    [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private float laserSpeed;
     private Quaternion originalRotation;
     private Quaternion minRotation;
     private Quaternion maxRotation;
@@ -78,8 +15,8 @@ public class ScanArea : MonoBehaviour
     {
         originalRotation = transform.rotation;
 
-        minRotation = originalRotation * Quaternion.Euler(0, 0, -90);
-        maxRotation = originalRotation * Quaternion.Euler(0, 0, -270);
+        minRotation = originalRotation * Quaternion.Euler(0, 0, -100);
+        maxRotation = originalRotation * Quaternion.Euler(0, 0, -260);
     }
 
     void Update()
@@ -101,6 +38,7 @@ public class ScanArea : MonoBehaviour
         {
             // when you hit something actually use this hit position as the end point for the line
             lineRenderer.SetPosition(1, raycastHit2D.point);
+
             if (raycastHit2D.collider.gameObject.CompareTag("Player"))
             {
                 lineRenderer.startColor = Color.red;
@@ -116,6 +54,8 @@ public class ScanArea : MonoBehaviour
         {
             // otherwise from the start position go 10 units in the up direction of your rotated object
             lineRenderer.SetPosition(1, startPosition + transform.up * 10f);
+            lineRenderer.startColor = Color.green;
+            lineRenderer.endColor = Color.green;
         }  
     }
 }
