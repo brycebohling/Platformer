@@ -175,10 +175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac81946f29f4483d934bc488babd232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 522061398392542951, guid: 986acfb6ae5784e4cb3d221e4b4a6b64, type: 3}
+  player: {fileID: 0}
   lineRenderer: {fileID: 5423302967388515794}
   laserSpeed: 0.2
-  timeToKill: 1
+  timeToKill: 0.8
 --- !u!1 &5423302968363868485
 GameObject:
   m_ObjectHideFlags: 0
