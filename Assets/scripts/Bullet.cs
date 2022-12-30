@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    PlayerLifeScript PLS;
+    GameMaster gm;
     public float speed;
     Rigidbody2D rb;
     void Start()
     {
-        PLS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLifeScript>();
+        gm = GameObject.FindGameObjectWithTag("gameMaster").GetComponent<GameMaster>();
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * speed;
     }
 
-    private void OnTriggerEnter2D(Collider2D collider) 
+    private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if (collider.gameObject.CompareTag("Player"))    
+        if (collision.gameObject.CompareTag("Player"))    
         {
-            PLS.respawn();
+            gm.killPlayer();
         } 
         Destroy(gameObject);
     }

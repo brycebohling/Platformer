@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour
 {
-    PlayerLifeScript PLS;
+    GameMaster gm;
     
-
     private void Start()
     {
-        PLS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLifeScript>();
+        gm = GameObject.FindGameObjectWithTag("gameMaster").GetComponent<GameMaster>();
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PLS.respawn();
+            gm.killPlayer();
         }
     }
 }

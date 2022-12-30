@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class CheckpointScript : MonoBehaviour
 {
-    PlayerLifeScript PLS;
-
+    GameMaster gm;
     private bool cantRun = false;
     private Animator anim;
      
     private void Start()
     {
-        PLS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLifeScript>();
+        gm = GameObject.FindGameObjectWithTag("gameMaster").GetComponent<GameMaster>();
         anim = GetComponent<Animator>();
     }
 
@@ -19,7 +18,7 @@ public class CheckpointScript : MonoBehaviour
     {
         if (!cantRun && collider.gameObject.CompareTag("Player"))
         {
-                PLS.whichCP++;
+                gm.whichRP++;
                 cantRun = true;
                 anim.SetBool("collided", true);
         }

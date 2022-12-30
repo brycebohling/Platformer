@@ -14,8 +14,6 @@ public class Turret : MonoBehaviour
         timebetween = starttimebetween;
     }
 
-
-
     void Update()
     {
         if(timebetween <= 0)
