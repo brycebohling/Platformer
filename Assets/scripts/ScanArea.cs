@@ -89,25 +89,4 @@ public class ScanArea : MonoBehaviour
             onPlayer = false;
         }  
     }
-
-    private void lockedOnPlayer()
-    {
-        // finding the distance to the player
-        Vector3 direction = player.position - transform.position;
-        // finding the  angle using invrse tan (have to -90 everytime because unity thing is always 90 off)
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-        // put the angle found into a axis, in this case it's the z axis
-        // Quaternion angleAxis = Quaternion.AngleAxis(angle, Vector3.forward);
-        // transform.rotation = Quaternion.Slerp(transform.rotation, angleAxis, laserSpeed * Time.deltaTime);
-        transform.eulerAngles = Vector3.forward * angle;
-        lineRenderer.startColor = Color.red;
-        lineRenderer.endColor = Color.red;
-
-        timeToKillCountdown -= Time.deltaTime;
-        if (timeToKillCountdown < 0)
-        {
-            gm.killPlayer();
-        }
-
-    }
 }   

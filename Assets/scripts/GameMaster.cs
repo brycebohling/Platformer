@@ -12,6 +12,7 @@ public class GameMaster : MonoBehaviour
     private Vector3 playerRespawnPoint;
     public void killPlayer()
     {   
+        
         // death particales
         deathEffect.gameObject.SetActive(true);
         deathEffect.Stop();
@@ -31,7 +32,8 @@ public class GameMaster : MonoBehaviour
     private void respawnPlayer()
     {   
         // seting the player position to the respawn point 
-        player.position = playerRespawnPoint;
+        player.position = playerRespawnPoint;   
         player.gameObject.SetActive(true);
+        
     }
 }
