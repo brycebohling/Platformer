@@ -8,6 +8,9 @@ TagManager:
   - checkPoint2
   - checkPoint3
   - gameMaster
+  - checkPoint4
+  - checkPoint5
+  - checkPoint6
   layers:
   - Default
   - TransparentFX
