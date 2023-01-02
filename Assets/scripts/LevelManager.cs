@@ -9,8 +9,15 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
     public void loadLevel1()
     {
         SceneManager.LoadScene("Level1");
     }
+
+    public void quitGame()
+    {
+        Application.Quit();
+    }
+    
 }
