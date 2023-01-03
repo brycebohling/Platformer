@@ -11,6 +11,7 @@ TagManager:
   - checkPoint4
   - checkPoint5
   - checkPoint6
+  - pauseManager
   layers:
   - Default
   - TransparentFX
