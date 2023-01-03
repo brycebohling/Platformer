@@ -12555,7 +12555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7626205856371747183, guid: c5cd0f97cd60644f3a4d0a74a2f77638, type: 3}
       propertyPath: m_Size.y
-      value: 5.6832895
+      value: 13.195557
       objectReference: {fileID: 0}
     - target: {fileID: 7626205856371747183, guid: c5cd0f97cd60644f3a4d0a74a2f77638, type: 3}
       propertyPath: m_Offset.x
@@ -12563,7 +12563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7626205856371747183, guid: c5cd0f97cd60644f3a4d0a74a2f77638, type: 3}
       propertyPath: m_Offset.y
-      value: 2.3416448
+      value: 6.0977783
       objectReference: {fileID: 0}
     - target: {fileID: 8931483696957357068, guid: c5cd0f97cd60644f3a4d0a74a2f77638, type: 3}
       propertyPath: playerCheck
@@ -14069,7 +14069,7 @@ PrefabInstance:
       objectReference: {fileID: 1233186173}
     - target: {fileID: 635999758063948245, guid: 5347f19ebf98c401488231722275545c, type: 3}
       propertyPath: wallLayer.m_Bits
-      value: 320
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 635999758063948249, guid: 5347f19ebf98c401488231722275545c, type: 3}
       propertyPath: m_RootOrder
