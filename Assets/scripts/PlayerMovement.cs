@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     private bool isGrounded;
-    private bool wasGrounded;
+
 
     //Jumping
     [SerializeField] private float jumpForce;

@@ -12,6 +12,7 @@ TagManager:
   - checkPoint5
   - checkPoint6
   - pauseManager
+  - movingPlatform
   layers:
   - Default
   - TransparentFX
